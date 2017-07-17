@@ -8,13 +8,12 @@ module.exports = function(config) {
       'node_modules/angular/angular.min.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/angularfire/dist/angularfire.min.js',
+      'js/vendor/firebase.js',
       'js/vendor/lvl-uuid.js',
       'js/vendor/lvl-drag-drop.js',
       'node_modules/ng-dialog/js/ngDialog.min.js',
       'node_modules/angular-aria/angular-aria.min.js',
       'node_modules/angular-sanitize/angular-sanitize.min.js',
-      'node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
-      'node_modules/papaparse/papaparse.min.js',
       'js/**/*.js',
       'test/**/*Test.js',
     ],
@@ -30,7 +29,7 @@ module.exports = function(config) {
     },
 
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['nyan', 'coverage'],
+    reporters: ['nyan', 'coverage', 'coveralls'],
 
     // web server port
     port: 9876,
@@ -47,6 +46,7 @@ module.exports = function(config) {
       'karma-mocha',
       'karma-phantomjs-launcher',
       'karma-coverage',
+      'karma-coveralls',
       'karma-nyan-reporter',
       'karma-mocha-reporter',
       'karma-sinon',

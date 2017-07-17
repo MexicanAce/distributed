@@ -2,36 +2,39 @@
 
 angular
   .module('fireideaz')
-  .service('Auth', ['$firebaseAuth', function ($firebaseAuth) {
-    var mainAuthRef = $firebaseAuth();
+  .service('Auth', function () {
+    var mainRef = new Firebase('https://blinding-torch-6662.firebaseio.com');
 
     function logUser(user, callback) {
-      var email = user + '@fireideaz.com';
-      var password = user;
-
-      mainAuthRef.$signOut();
-      mainAuthRef.$signInWithEmailAndPassword(email, password).then(function(userData) {
-        callback(userData);
-      }, function(error) {
-        console.log('Logged user failed: ', error);
-        window.location.hash = '';
-        location.reload();
+      mainRef.unauth();
+      mainRef.authWithPassword({
+        email    : user + '@fireideaz.com',
+        password : user
+      }, function(error, authData) {
+        if (error) {
+          console.log('Log user failed: ', error);
+          window.location.hash = '';
+          location.reload();
+        } else {
+          callback(authData);
+        }
       });
     }
 
     function createUserAndLog(newUser, callback) {
-      var email = newUser + '@fireideaz.com';
-      var password = newUser;
-
-      mainAuthRef.$createUserWithEmailAndPassword(email, password).then(function() {
-        logUser(newUser, callback);
+      mainRef.createUser({
+        email    : newUser + '@fireideaz.com',
+        password : newUser
       }, function(error) {
-        console.log('Create user failed: ', error);
+        if (error) {
+          console.log('Create user failed: ', error);
+        } else {
+          logUser(newUser, callback);
+        }
       });
     }
-
     return {
       createUserAndLog: createUserAndLog,
       logUser: logUser
     };
-  }]);
+  });

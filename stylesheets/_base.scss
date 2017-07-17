@@ -1,22 +1,26 @@
+/* BEGIN Regular */
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
+
   src: url("../fonts/Roboto-Regular.eot?v=0.4.2");
   src: url("../fonts/Roboto-Regular.eot?#iefix&v=0.4.2") format("embedded-opentype"), url("../fonts/Roboto-Regular.woff?v=0.4.2") format("woff"), url("../fonts/Roboto-Regular.ttf?v=0.4.2") format("truetype"), url("../fonts/Roboto-Regular.svg?v=0.4.2") format("svg");
 }
 
+/* END Regular */
+
+/* BEGIN Bold */
 @font-face {
   font-family: 'RobotoBold';
   font-style: normal;
   font-weight: normal;
+
   src: url("../fonts/Roboto-Bold.eot?v=0.4.2");
   src: url("../fonts/Roboto-Bold.eot?#iefix&v=0.4.2") format("embedded-opentype"), url("../fonts/Roboto-Bold.woff?v=0.4.2") format("woff"), url("../fonts/Roboto-Bold.ttf?v=0.4.2") format("truetype"), url("../fonts/Roboto-Bold.svg?v=0.4.2") format("svg");
 }
 
-legend {
-  display: none;
-}
+/* END Bold */
 
 body {
   margin: 0;
@@ -56,12 +60,11 @@ strong {
 }
 
 .add i {
-  font-size: 0.9em;
+  font-size: .9em;
 }
 
 ul {
   padding-left: 0;
-  margin-top: 0;
 }
 
 h2 {
@@ -80,13 +83,20 @@ h2 {
   top: -2px;
   left: -5px;
   margin: 0;
-  font-size: 0.9em;
+  font-size: .9em;
 }
 
 .container {
-  display: flex;
+  display: -webkit-box;
+  display:    -moz-box;
+  display: -ms-flexbox;
+  display:    -moz-flex;
+  display: -webkit-flex;
+  display:         flex;
   width: 100%;
   padding-bottom: 35px;
+
+  -ms-box-orient: horizontal;
 }
 
 .success-button {
@@ -104,11 +114,10 @@ h2 {
 }
 
 .editing-column {
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
 }
 
-.editing-column input,
-.editing-board-name input {
+.editing-column input {
   max-width: 300px;
   font-size: 1.3em;
   font-weight: bold;
@@ -119,35 +128,20 @@ h2 {
   position: relative;
   top: 7px;
   margin-left: 5px;
-  font-size: 0.9em;
+  font-size: .9em;
 }
 
-.board-context {
+ul {
+  margin-top: 0;
+}
+
+#board-context {
   height: 36px;
   padding-left: 14px;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: $grey;
   border: none;
-}
-
-.board-name + .fa-pencil {
-  display: none;
-}
-
-.board-name:hover + .fa-pencil {
-  display: inline-block;
-}
-
-.editing-board-name button.success-button,
-.editing-board-name input,
-.editing-board-name a.blue {
-  margin: 0 5px 0 0;
-  vertical-align: middle;
-}
-
-.editing-board-name a.blue {
-  font-size: 0.9em;
 }
 
 .delete {
@@ -166,20 +160,28 @@ h2 {
 }
 
 .editing .fa-times {
-  font-size: 0.9em;
+  font-size: .9em;
 }
 
-a:not(.disabled) .fa-thumbs-o-up:hover::before {
+.fa-thumbs-o-up:hover:before {
   content: '\f164';
 }
 
-a:not(.disabled) .fa-thumbs-o-up:hover {
+.fa-thumbs-o-up:hover {
+  width: 12.8281px;
+}
+
+.fa-thumbs-o-down:hover:before {
+  content: '\f165';
+}
+
+.fa-thumbs-o-down:hover {
   width: 12.8281px;
 }
 
 .fa-pencil:hover {
   color: $darkest-gray;
-  opacity: 0.5;
+  opacity: .5;
 }
 
 .message-body a.delete-link {
@@ -203,9 +205,9 @@ img {
 }
 
 small {
-  margin-left: 0.5em;
-  font-size: 1em;
-  color: $light-grey;
+  margin-left: 1em;
+  font-size: .8em;
+  color: $lightest-gray;
 }
 
 h1 {
@@ -218,24 +220,70 @@ input {
   padding: 3px 5px;
   background: white;
   border: 1px solid $lightest-gray;
+  border-radius: 2px;
 }
 
-input[type="text"],
-input[type="number"] {
+input[type="text"] {
   width: 200px;
   font-size: 18px;
 }
 
 .ngdialog-content h1 {
   margin: 0;
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
 }
 
-.ngdialog.ngdialog-theme-plain.bigDialog {
+.ngdialog-content {
+  width: 350px !important;
+}
+
+.ngdialog.bigDialog {
   padding-top: 60px;
 
   .ngdialog-content {
-    width: 700px;
+    width: 700px !important;
+  }
+}
+
+.ngdialog.countdownDialog {
+  .timer {
+    font-size: 74px;
+    text-align: center;
+  }
+
+  .blink {
+    animation: blink-animation 500ms steps(5, start) infinite;
+  }
+
+  @keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+  }
+  
+  .message-text {
+    text-align: center;
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  .editing {
+    margin-bottom: 30px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px #adadad dashed;
+
+    textarea {
+      width: 100%;
+      height: 76px;
+      margin-bottom: 12px;
+    }
+
+    select {
+      margin-right: 22px;
+      height: 28px;
+      min-width: 130px;
+    }
   }
 }
 
@@ -263,80 +311,141 @@ blockquote {
     line-height: 20px;
     text-align: right;
 
-    &::before {
+    &:before {
       content: '\2014';
     }
   }
 }
 
-.message-list.lvl-over,
 .message > div > .lvl-over {
   @include transition(none);
-  outline: 2px dashed $outline-color;
-}
-
-.message > div > .lvl-over {
-  outline-offset: 4px;
+  outline: 2px dashed $lightest-gray !important;
 }
 
 .message-list.lvl-over {
+  @include transition(none);
+  outline: 2px dashed $lightest-gray !important;
   outline-offset: 6px;
 }
 
 [draggable] {
   cursor: move;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+
+   -khtml-user-select: none;
 }
 
-.ngdialog.ngdialog-theme-plain .ngdialog-content .header {
+.feature-notification {
+  @include media-query($tablet) {
+    left: 0;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    overflow-y: scroll;
+  }
+  @include media-query($phone) {
+    top: 0;
+    height: 100vh;
+  }
+  position: fixed;
+  top: 50px;
+  left: 22%;
+  width: 660px;
+  height: 530px;
+  padding: 30px;
+  font-size: 18px;
+  color: white;
+  text-align: center;
+  background: white;
+
+  .feature {
+    @include media-query($phone) {
+      display: block;
+      width: 100%;
+    }
+    display: inline-block;
+    width: 48%;
+    margin-top: 20px;
+  }
+
+  .title {
+    @include media-query($phone) {
+      font-size: 1.5em;
+    }
+    display: inline-block;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: $light-purple;
+  }
+
+  button {
+    display: block;
+    width: 120px;
+    height: 37px;
+    margin: 0 auto;
+    margin-top: 25px;
+    font-size: 16px;
+    text-transform: uppercase;
+    background: $purple;
+    border-bottom: 3px solid $light-purple;
+  }
+
+  h3 {
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: $dark-gray;
+  }
+
+  img {
+    width: 280px;
+    border: 1px solid $lightest-gray;
+  }
+
+  a {
+    font-size: 1.2em;
+    color: $yellow;
+    text-decoration: underline;
+  }
+
+  i {
+    @include media-query($phone) {
+      padding-bottom: 15px;
+      padding-left: 15px;
+      font-size: 1.5em;
+    }
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: $dark-gray;
+    cursor: pointer;
+  }
+}
+
+.danger p.header {
   position: relative;
-  top: -18px;
-  left: -23px;
+  top: -15px;
+  left: -15px;
   width: 350px;
-  padding: 10px 17px;
+  padding: 10px 17px !important;
   margin: 0;
   margin-bottom: -10px;
   font-size: 1.3em;
-  color: white;
-  background: $danger;
+  color: white !important;
+  background: #df3e3e;
 }
 
-.base-msg {
-  padding: 10px;
-  margin: 10px 0;
-  font-size: 0.85em;
-  border-radius: 3px;
-}
-
-.info-msg {
-  @extend .base-msg;
-  color: $info-msg;
-  background-color: $info-msg-back;
-}
-
-.success-msg {
-  @extend .base-msg;
-  color: $success-msg;
-  background-color: $success-msg-back;
-}
-
-.warning-msg {
-  @extend .base-msg;
-  color: $warning-msg;
-  background-color: $warning-msg-back;
-}
-
-.error-msg {
-  @extend .base-msg;
-  color: $error-msg;
-  background-color: $error-msg-back;
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }
 
 .copy-text {
   padding: 15px;
   margin: 20px 0;
-  background: white;
-  border: 1px solid $lighter-gray;
+  background: #eee;
+  border: 1px solid #ddd;
   border-radius: 2px;
 }
 
@@ -348,48 +457,10 @@ blockquote {
     padding: 0 15px;
     padding-bottom: 10px;
     align-items: center;
-    border-bottom: 1px solid $almost-white;
+    border-bottom: 1px solid #eee;
   }
 
   select {
     flex-grow: 2;
-  }
-}
-
-.ngdialog.ngdialog-theme-plain .ngdialog-content {
-  width: 350px;
-  padding: 1.2em 1.5em 1.5em;
-
-  h1 {
-    font-size: 1.7em;
-  }
-
-  label {
-    display: inline-block;
-    padding: 15px 0 10px;
-    font-size: 16px;
-  }
-
-  input {
-    display: block;
-    width: 250px;
-    height: 30px;
-    font-size: 16px;
-  }
-
-  button {
-    height: auto;
-    padding: 5px 10px;
-    margin: 0;
-    margin-top: 1.5em;
-    border-radius: 0;
-  }
-
-  .aling-left {
-    text-align: left;
-  }
-
-  .align-right {
-    text-align: right;
   }
 }

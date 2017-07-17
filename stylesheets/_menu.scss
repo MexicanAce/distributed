@@ -5,7 +5,8 @@
   box-sizing: border-box;
   padding: 10px 15px;
   overflow: hidden;
-  border-bottom: 2px solid $almost-white;
+  background: #eee;
+  border-top: 2px solid #aaa;
 
   h2 {
     margin-top: 0;
@@ -33,40 +34,7 @@
     }
   }
 
-  h2,
-  label {
+  h2, label {
     line-height: 1.3em;
   }
-}
-
-.remaining-votes {
-  padding: 8px 12px;
-  margin-right: 10px;
-  border-radius: 2px;
-  box-shadow: 0 0 0 0 rgba($teal, 0.5);
-  animation: pulse 1.5s;
-
-  strong {
-    margin: 0;
-    font-size: 1.3em;
-    color: $teal;
-  }
-
-  @keyframes pulse {
-    70% {
-      box-shadow: 0 0 0 50px rgba($teal, 0);
-    }
-
-    100% {
-      box-shadow: 0 0 0 0 rgba($teal, 0);
-    }
-  }
-}
-
-.filter-message {
-  width: 200px;
-  height: 25px;
-  margin-left: 15px;
-  font-size: 0.85em;
-  vertical-align: top;
 }

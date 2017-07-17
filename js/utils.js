@@ -4,10 +4,18 @@ angular
   .module('fireideaz')
   .service('Utils', [function () {
     function createUserId() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
+      var text = '';
+      var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+      for( var i=0; i < 7; i++ ) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+
+      return text;
+    }
+
+    function alreadyVoted(key) {
+      return localStorage.getItem(key);
     }
 
     function focusElement(id) {
@@ -43,11 +51,12 @@ angular
     }
 
     function columnClass(id) {
-      return 'column_' + (id % 6 || 6);
+      return "column_" + (id % 6 || 6);
     }
 
     return {
       createUserId: createUserId,
+      alreadyVoted: alreadyVoted,
       focusElement: focusElement,
       messageTypes: messageTypes,
       getNextId: getNextId,

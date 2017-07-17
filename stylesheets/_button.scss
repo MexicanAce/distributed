@@ -1,5 +1,4 @@
-button,
-.button {
+button, .button {
   width: auto;
   padding: 5px 8px;
   margin-left: 10px;
@@ -11,6 +10,7 @@ button,
   border: 0;
   border-bottom: 2px solid $dark-blue;
   border-radius: 2px;
+  transform: translate3d(0px, 0px, 0px);
 
   &.first {
     background: $purple;
@@ -19,12 +19,17 @@ button,
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.65;
+    opacity: .65;
+  }
+  
+  &.disabled {
+    background: #ccc;
+    border-color: darken(#ccc, 15%);
   }
 
   &.delete-button {
-    background: $danger;
-    border-color: darken($danger, 15%);
+    background: #df3e3e;
+    border-color: darken(#df3e3e, 15%);
   }
 }
 
@@ -36,26 +41,18 @@ header button:hover {
 }
 
 .ngdialog-content button {
-  display: inline-block;
   height: 28px;
   font-size: 1em;
   vertical-align: top;
 }
 
 .ngdialog-content a {
-  display: inline-block;
-  margin-top: 2em;
   margin-left: 10px;
   font-size: 1em;
   color: $light-teal;
 }
 
-.ngdialog-content a.inline-link {
-  margin: 0;
-}
-
-.ngdialog-content button:hover,
-.editing-column button:hover {
+.ngdialog-content button:hover, .editing-column button:hover {
   position: relative;
   top: 1px;
   border-bottom: 0;
@@ -74,12 +71,11 @@ header button:hover {
   height: 20px;
   padding: 0;
   margin-left: 0;
-  font-size: 0.7em;
+  font-size: .7em;
   line-height: 2em;
   background: $green;
 }
 
-.success-button,
-.message button {
+.success-button, .message button {
   border-bottom: 2px solid $light-green;
 }

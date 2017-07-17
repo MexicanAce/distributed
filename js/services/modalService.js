@@ -2,7 +2,7 @@
 
 angular
   .module('fireideaz')
-  .service('ModalService', ['ngDialog', function(ngDialog) {
+  .service('ModalService', ['ngDialog', '$interval', function(ngDialog, $interval) {
     return {
       openAddNewColumn: function(scope) {
         ngDialog.open({
@@ -32,18 +32,9 @@ angular
           scope: scope
         });
       },
-
       openMergeCards: function(scope) {
         ngDialog.open({
           template: 'mergeCards',
-          className: 'ngdialog-theme-plain',
-          scope: scope
-        });
-      },
-       openImportBoard: function(scope) {
-        scope.cleanImportData();
-        ngDialog.open({
-          template: 'importCards',
           className: 'ngdialog-theme-plain',
           scope: scope
         });
@@ -55,13 +46,6 @@ angular
           scope: scope
         });
       },
-      openDeleteBoard: function(scope) {
-        ngDialog.open({
-          template: 'deleteBoard',
-          className: 'ngdialog-theme-plain danger',
-          scope: scope
-        });
-      },
       openDeleteCards: function(scope) {
         ngDialog.open({
           template: 'deleteCards',
@@ -69,15 +53,26 @@ angular
           scope: scope
         });
       },
-      openVoteSettings: function(scope) {
-        ngDialog.open({
-          template: 'voteSettings',
-          className: 'ngdialog-theme-plain',
-          scope: scope
-        });
-      },
       closeAll: function() {
         ngDialog.closeAll();
+      },
+      toggleTimer: function(scope) {
+          scope.toggleTimer = !scope.toggleTimer;
+      },
+      openTimerCountdown: function(scope) {
+        scope.startCountdown();
+        //Display new line characters
+        scope.messageText = (scope.message.text).replace(/(?:\r\n|\r|\n)/g, '<br>');
+        
+        ngDialog.open({
+          template: 'timerCountdown',
+          className: 'ngdialog-theme-plain bigDialog countdownDialog',
+          scope: scope,
+          preCloseCallback: function(value) {
+            $interval.cancel(scope.tickDown);
+            return true;
+          }
+        });
       }
     };
   }]);

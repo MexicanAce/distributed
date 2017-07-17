@@ -2,29 +2,31 @@
 
 angular
   .module('fireideaz')
-  .service('FirebaseService', ['firebase', '$firebaseArray', function (firebase, $firebaseArray) {
+  .service('FirebaseService', ['$firebaseArray', function ($firebaseArray) {
+    var firebaseUrl = 'https://MAKE_YOUR_OWN.firebaseio.com';
+
     function newFirebaseArray(messagesRef) {
       return $firebaseArray(messagesRef);
     }
 
     function getServerTimestamp() {
-      return firebase.database.ServerValue.TIMESTAMP;
+      return Firebase.ServerValue.TIMESTAMP;
     }
 
     function getMessagesRef(userId) {
-      return firebase.database().ref('/messages/' + userId);
+      return new Firebase(firebaseUrl + '/messages/' + userId);
     }
 
     function getMessageRef(userId, messageId) {
-      return firebase.database().ref('/messages/' + userId + '/' + messageId);
+      return new Firebase(firebaseUrl + '/messages/' + userId + '/' + messageId);
     }
 
     function getBoardRef(userId) {
-      return firebase.database().ref('/boards/' + userId);
+      return new Firebase(firebaseUrl + '/boards/' + userId);
     }
 
     function getBoardColumns(userId) {
-      return firebase.database().ref('/boards/' + userId + '/columns');
+      return new Firebase(firebaseUrl + '/boards/' + userId + '/columns');
     }
 
     return {

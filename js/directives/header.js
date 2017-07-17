@@ -5,6 +5,7 @@ angular.module('fireideaz').directive('pageHeader', ['ModalService', function(mo
       templateUrl : 'components/header.html',
       link: function($scope) {
         $scope.modalService = modalService;
+        $scope.displayHeader = true;
       }
     };
   }]

@@ -7,27 +7,25 @@ describe('MessageCtrl: ', function() {
       firebaseService,
       auth
 
-  beforeEach(function() {
-    angular.mock.module('fireideaz');
+  beforeEach(angular.mock.module('fireideaz'));
 
-    inject(function($injector){
-      $rootScope = $injector.get('$rootScope');
-      $scope = $rootScope.$new();
-      $controller = $injector.get('$controller');
-      modalService = $injector.get('ModalService');
-      firebaseService = $injector.get('FirebaseService');
-      auth = $injector.get('Auth');
+  beforeEach(inject(function($injector){
+    $rootScope = $injector.get('$rootScope');
+    $scope = $rootScope.$new();
+    $controller = $injector.get('$controller');
+    modalService = $injector.get('ModalService');
+    firebaseService = $injector.get('FirebaseService');
+    auth = $injector.get('Auth');
 
-      $scope.userId = 'userId';
+    $scope.userId = 'userId';
 
-      $controller('MessageCtrl', {
-        '$scope': $scope,
-        'modalService': modalService,
-        'firebaseService': firebaseService,
-        'auth': auth
-      });
+    $controller('MessageCtrl', {
+      '$scope': $scope,
+      'modalService': modalService,
+      'firebaseService': firebaseService,
+      'auth': auth
     });
-  });
+  }));
 
   it('should open dialog to merge cards when drop an card over another card', function () {
     sinon.spy(modalService, 'openMergeCards');
